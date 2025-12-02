@@ -22,6 +22,14 @@ d1p1 = executable(
   install: true)
 run_target('day1_p1', command: [d1p1, '../data/day1.txt'])
 
+d1p2 = executable(
+  'd1p2',
+  'day1_p2.c',
+  c_args: c_args,
+  dependencies: dependencies,
+  install: true)
+run_target('day1_p2', command: [d1p2, '../data/day1.txt'])
+
 run = executable(
   'AOC25',
   'aoc25.c',
