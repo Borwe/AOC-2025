@@ -6,7 +6,10 @@ project(
   default_options : ['warning_level=3'],
 )
 
+bo_arena = dependency('bo_arena', required: true)
+
 dependencies = [
+  bo_arena
 ]
 
 run = executable(
