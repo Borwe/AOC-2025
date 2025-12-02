@@ -8,9 +8,19 @@ project(
 
 bo_arena = dependency('bo_arena', required: true)
 
+c_args = ['-std=c11', '-Wall', '-Werror', '-Wextra', '-pedantic']
+
 dependencies = [
   bo_arena
 ]
+
+d1p1 = executable(
+  'd1p1',
+  'day1_p1.c',
+  c_args: c_args,
+  dependencies: dependencies,
+  install: true)
+run_target('day1_p1', command: [d1p1, '../data/day1.txt'])
 
 run = executable(
   'AOC25',
