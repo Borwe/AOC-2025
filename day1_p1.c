@@ -15,7 +15,8 @@ bool is_pointer_set_zero(int *ptr, const Line line){
         sum = -sum;
     }
     *ptr = (*ptr +  sum)%100;
-    return *ptr == 100 || *ptr == 0;
+    *ptr = *ptr < 0 ? *ptr + 100: *ptr;
+    return *ptr == 0;
 }
 
 int logic(bo_arena *arena, const ArrayOfchars data){
