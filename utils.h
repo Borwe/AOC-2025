@@ -1,9 +1,13 @@
 #ifndef AOC_UTILS_H
 #define AOC_UTILS_H
 
+#include <errno.h>
 #include <stddef.h>
 #include <bo_arena.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 typedef struct Line {
     char *start;
@@ -18,6 +22,26 @@ typedef struct Line {
 
 declare_array_of(Line)
 declare_array_of(char)
+
+ArrayOfchars get_file_data(
+    bo_arena *arena,
+    const char *restrict file){
+
+    FILE *f = fopen(file, "r");
+    bo_arena_assert(f!=NULL, "Data wasn't readable");
+    struct stat s;
+    if(stat(file,&s) !=0 ){
+        const char *err = strerror(errno);
+        fprintf(stderr, "Failed reading file, with error: %s\n", err);
+        exit(-1);
+    }
+    ArrayOfchars file_data = {0};
+    bo_allocate_items(file_data.items, true, arena, char, s.st_size);
+    file_data.len = fread(file_data.items, sizeof(char), s.st_size, f);
+    bo_arena_assert(file_data.len>0, "Seems no data was read");
+    fclose(f);
+    return file_data;
+}
 
 
 ArrayOfLines parse_lines(bo_arena *arena, const ArrayOfchars data){
