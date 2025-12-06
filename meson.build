@@ -21,7 +21,6 @@ d1p1 = executable(
   dependencies: dependencies,
   install: true)
 run_target('day1_p1', command: [d1p1, '../data/day1.txt'])
-
 d1p2 = executable(
   'd1p2',
   'day1_p2.c',
@@ -30,6 +29,7 @@ d1p2 = executable(
   install: true)
 run_target('day1_p2', command: [d1p2, '../data/day1.txt'])
 
+
 d2p1 = executable(
   'd2p1',
   'day2_p1.c',
@@ -37,6 +37,13 @@ d2p1 = executable(
   dependencies: dependencies,
   install: true)
 run_target('day2_p1', command: [d2p1, '../data/day2.txt'])
+d2p2 = executable(
+  'd2p2',
+  'day2_p2.c',
+  c_args: c_args,
+  dependencies: dependencies,
+  install: true)
+run_target('day2_p2', command: [d2p2, '../data/day2.txt'])
 
 run = executable(
   'AOC25',
